@@ -7,5 +7,6 @@ public class Main{
             factory.createPerson();
         }
         System.out.print(factory);
+        System.out.println("I will not die!");
     }
 }
