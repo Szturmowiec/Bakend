@@ -1,10 +1,10 @@
 package Employees;
 
-public interface Employee{
+public interface IEmployee{
     public String getName();
     public String getSurname();
     public String getOccupation();
     public String getRole();
-    public void assign(Task task);
+    public String assign(Task task);
     public Report reportWork();
 }

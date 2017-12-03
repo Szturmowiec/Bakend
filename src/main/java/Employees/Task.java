@@ -16,4 +16,8 @@ public class Task{
     public int getTime(){
         return this.time;
     }
+
+    public String toString(){
+        return this.type+": "+this.time+" hours";
+    }
 }

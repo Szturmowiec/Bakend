@@ -1,12 +1,12 @@
 package Employees;
 
-public abstract class EmployeeProperties{
+public abstract class AbstractEmployee implements IEmployee{
     private String name;
     private String surname;
     private String occupation;
     private String role;
 
-    public EmployeeProperties(String name, String surname, String occupation, String role){
+    public AbstractEmployee(String name, String surname, String occupation, String role){
         this.name=name;
         this.surname=surname;
         this.occupation=occupation;

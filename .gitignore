@@ -3,7 +3,6 @@ gradle/
 .gradle/
 .idea/modules/
 gradlew
-build.gradle
 gradlew.bat
 settings.gradle
 *.xml
