@@ -6,5 +6,6 @@ public interface IEmployee{
     public String getOccupation();
     public String getRole();
     public String assign(Task task);
-    public Report reportWork();
+    public void giveTask(Task task);
+    public IReport reportWork();
 }

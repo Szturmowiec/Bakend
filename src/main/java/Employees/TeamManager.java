@@ -5,11 +5,26 @@ import java.util.*;
 public class TeamManager extends AbstractEmployee implements IManager{
     private ArrayList<IEmployee> subordinates;
     private int subordinatesQuantity;
+    private Task currenttask;
+    private ArrayList<Task> tasks;
 
-    public TeamManager(String name, String surname, String role, int subordinatesQuantity){
+    public TeamManager(String name, String surname, String role){
         super(name,surname,"Manager",role);
-        this.subordinatesQuantity=subordinatesQuantity;
+        this.subordinatesQuantity=2;
         this.subordinates=new ArrayList<>();
+        this.tasks=new ArrayList<>();
+    }
+
+    public Task getCurrenttask(){
+        return currenttask;
+    }
+
+    public ArrayList<IEmployee> getSubordinates(){
+        return subordinates;
+    }
+
+    public int getSubordinatesQuantity(){
+        return subordinatesQuantity;
     }
 
     public boolean canHire(){
@@ -26,11 +41,28 @@ public class TeamManager extends AbstractEmployee implements IManager{
         subordinates.remove(employee);
     }
 
-    public Report reportWork(){
-        return new Report(new ArrayList<Task>(), this);
+    public IReport reportWork(){
+        return new ManagerReport(tasks, this);
     }
 
     public String assign(Task task){
-        return "l";
+            this.currenttask=task;
+            this.tasks.add(task);
+            return task.getType()+": "+task.getTime()+" hours";
+    }
+
+    public void giveTask(Task task){
+        if (this.subordinates.isEmpty() || task.getType().equals("Implement bug") || (task.getTime()==1 && this.getRole().equals("Development manager"))){
+            this.assign(task);
+        }
+        else{
+            Random r=new Random();
+            int i=r.nextInt(this.subordinates.size());
+            this.subordinates.get(i).giveTask(task);
+        }
+    }
+
+    public String toString(){
+        return "MANAGER WORK REPORT\n"+reportWork()+"\nEND OF REPORT\nCurrent task - "+this.getCurrenttask();
     }
 }

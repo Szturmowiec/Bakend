@@ -2,18 +2,20 @@ package Employees;
 
 import java.util.*;
 
-public class Report{
+public class ManagerReport implements IReport{
     private ArrayList<Task> tasks;
     private int workedhours;
-    private IEmployee employee;
+    private TeamManager employee;
+    private ArrayList<IEmployee> subordinates;
 
-    public Report(ArrayList<Task> tasks, IEmployee employee){
+    public ManagerReport(ArrayList<Task> tasks, TeamManager employee){
         this.tasks=tasks;
         this.workedhours=0;
         for (Task t: tasks){
             workedhours+=t.getTime();
         }
         this.employee=employee;
+        this.subordinates=employee.getSubordinates();
     }
 
     public ArrayList<Task> getTasks(){
@@ -33,9 +35,12 @@ public class Report{
         output+=", Employee occupation: "+this.employee.getOccupation()+", Employee role: "+this.employee.getRole();
         output+="\nTasks assigned:\n";
         for (Task t: this.tasks){
-            output=output+t.getType()+", time: "+t.getTime()+" hours\n";
+            output+=t.getType()+", time: "+t.getTime()+" hours\n";
         }
-        output=output+"Total hours worked: "+this.workedhours;
+        output+="Total hours worked: "+this.workedhours+"\nREPORTS OF SUBORDINATES:\n";
+        for (IEmployee d: this.subordinates){
+            output+=d.reportWork()+"\n\n";
+        }
         return output;
     }
 }

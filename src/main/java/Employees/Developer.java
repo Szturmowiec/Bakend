@@ -21,8 +21,12 @@ public class Developer extends AbstractEmployee{
         return task.getType()+": "+task.getTime()+" hours";
     }
 
-    public Report reportWork(){
-        return new Report(tasks, this);
+    public void giveTask(Task task){
+        this.assign(task);
+    }
+
+    public IReport reportWork(){
+        return new DeveloperReport(tasks, this);
     }
 
     public String toString(){
