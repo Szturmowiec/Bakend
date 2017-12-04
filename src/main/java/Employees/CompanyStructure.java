@@ -5,10 +5,9 @@ import java.util.*;
 public class CompanyStructure{
     private final int level;
     private final TeamManager boss;
-    private final String[] tasks={"Implement bug", "Dig a trench", "Make a coffee", "Open fire", "Cease fire", "Reload", "Commit a suicide"};
-    private final int[] times={1,2,3,4,5};
 
-    public CompanyStructure(int level){
+    public CompanyStructure(int level) throws IllegalArgumentException{
+        if (level<=0) throw new IllegalArgumentException("Level must be a positive number!");
         this.level=level;
         WorkerBuilder w=new WorkerBuilder();
         this.boss=w.generateManager();
@@ -19,6 +18,7 @@ public class CompanyStructure{
     }
 
     public void getWorkers(TeamManager manager, int level){
+        if (level==0) return;
         if (level==1){
             WorkerBuilder w=new WorkerBuilder();
             manager.hire(w.generateDeveloper());
@@ -43,9 +43,8 @@ public class CompanyStructure{
     public void generateTasks(int n){
         for (int i=0; i<n; i++){
             Random r=new Random();
-            int a=r.nextInt(7);
-            int b=r.nextInt(5);
-            Task task=new Task(tasks[a], times[b]);
+            int a=r.nextInt(Tasks.values().length);
+            Task task=new Task(Tasks.values()[a].getTaskName(), Tasks.values()[a].getTaskTime());
             boss.giveTask(task);
         }
     }

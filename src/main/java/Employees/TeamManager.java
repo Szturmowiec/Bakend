@@ -9,7 +9,7 @@ public class TeamManager extends AbstractEmployee implements IManager{
     private ArrayList<Task> tasks;
 
     public TeamManager(String name, String surname, String role){
-        super(name,surname,"Manager",role);
+        super(name, surname, Occupations.valueOf("Manager").getOccupationName(), role);
         this.subordinatesQuantity=2;
         this.subordinates=new ArrayList<>();
         this.tasks=new ArrayList<>();

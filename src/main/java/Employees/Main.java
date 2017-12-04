@@ -2,7 +2,7 @@ package Employees;
 
 public class Main{
     public static void main(String Args[]){
-        CompanyStructure x=new CompanyStructure(3);
+        CompanyStructure x=new CompanyStructure(Integer.valueOf(Args[0]));
         x.generateCompany();
 
         /*if (x.getBoss().getSubordinates().get(0) instanceof TeamManager){

@@ -6,7 +6,11 @@ public abstract class AbstractEmployee implements IEmployee{
     private String occupation;
     private String role;
 
-    public AbstractEmployee(String name, String surname, String occupation, String role){
+    public AbstractEmployee(String name, String surname, String occupation, String role) throws IllegalArgumentException{
+        if (!name.matches("[a-zA-Z]+")) throw new IllegalArgumentException("Wrong name!");
+        if (!surname.matches("[a-zA-Z]+")) throw new IllegalArgumentException("Wrong surname!");
+        if (!occupation.matches("[ a-zA-Z]+")) throw new IllegalArgumentException("Wrong occupation!");
+        if (!role.matches("[ a-zA-Z]+")) throw new IllegalArgumentException("Wrong role!");
         this.name=name;
         this.surname=surname;
         this.occupation=occupation;

@@ -11,7 +11,7 @@ public class Developer extends AbstractEmployee{
     }
 
     public Developer(String name, String surname, String role){
-        super(name,surname,"Developer",role);
+        super(name, surname, Occupations.valueOf("Developer").getOccupationName(), role);
         this.tasks=new ArrayList<>();
     }
 
