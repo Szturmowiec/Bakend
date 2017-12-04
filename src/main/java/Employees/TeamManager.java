@@ -8,9 +8,10 @@ public class TeamManager extends AbstractEmployee implements IManager{
     private Task currenttask;
     private ArrayList<Task> tasks;
 
-    public TeamManager(String name, String surname, String role){
+    public TeamManager(String name, String surname, String role, int subordinatesQuantity) throws IllegalArgumentException{
         super(name, surname, Occupations.valueOf("Manager").getOccupationName(), role);
-        this.subordinatesQuantity=2;
+        if (subordinatesQuantity<=0) throw new IllegalArgumentException("Manager must have a positive amount of subordinates.");
+        this.subordinatesQuantity=subordinatesQuantity;
         this.subordinates=new ArrayList<>();
         this.tasks=new ArrayList<>();
     }

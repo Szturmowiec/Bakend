@@ -42,7 +42,8 @@ public class WorkerBuilder{
         int i=r.nextInt(names.size());
         int j=r.nextInt(surnames.size());
         int k=r.nextInt(ManagerRoles.values().length);
-        TeamManager manager=new TeamManager(names.get(i), surnames.get(j), ManagerRoles.values()[k].getManagerRole());
+        int q=r.nextInt(5)+1;
+        TeamManager manager=new TeamManager(names.get(i), surnames.get(j), ManagerRoles.values()[k].getManagerRole(), q);
         return manager;
     }
 }

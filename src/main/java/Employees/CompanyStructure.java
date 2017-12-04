@@ -21,18 +21,22 @@ public class CompanyStructure{
         if (level==0) return;
         if (level==1){
             WorkerBuilder w=new WorkerBuilder();
-            manager.hire(w.generateDeveloper());
-            manager.hire(w.generateDeveloper());
+            for (int i=0; i<manager.getSubordinatesQuantity(); i++){
+                manager.hire(w.generateDeveloper());
+            }
         }
         else{
+            Random r=new Random();
             WorkerBuilder w=new WorkerBuilder();
-            TeamManager a=w.generateManager();
-            TeamManager b=w.generateManager();
-            manager.hire(a);
-            manager.hire(b);
-
-            getWorkers(a, level-1);
-            getWorkers(b, level-1);
+            for (int i=0; i<manager.getSubordinatesQuantity(); i++){
+                int n=r.nextInt(2);
+                if (n==0) manager.hire(w.generateDeveloper());
+                else{
+                    TeamManager a=w.generateManager();
+                    manager.hire(a);
+                    getWorkers(a, level-1);
+                }
+            }
         }
     }
 
