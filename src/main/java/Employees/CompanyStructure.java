@@ -3,8 +3,8 @@ package Employees;
 import java.util.*;
 
 public class CompanyStructure{
-    private final int level;
-    private final TeamManager boss;
+    private int level;
+    private IManager boss;
 
     public CompanyStructure(int level) throws IllegalArgumentException{
         if (level<=0) throw new IllegalArgumentException("Level must be a positive number!");
@@ -13,35 +13,35 @@ public class CompanyStructure{
         this.boss=w.generateManager();
     }
 
-    public TeamManager getBoss(){
+    public IManager getBoss(){
         return this.boss;
     }
 
-    public void getWorkers(TeamManager manager, int level){
+    public void getWorkers(IManager manager, int level){
         if (level==0) return;
         if (level==1){
             WorkerBuilder w=new WorkerBuilder();
-            for (int i=0; i<manager.getSubordinatesQuantity(); i++){
+            while (manager.getSubordinates().size()<manager.getSubordinatesQuantity()){
                 manager.hire(w.generateDeveloper());
             }
         }
         else{
             Random r=new Random();
             WorkerBuilder w=new WorkerBuilder();
-            for (int i=0; i<manager.getSubordinatesQuantity(); i++){
+            while (manager.getSubordinates().size()<manager.getSubordinatesQuantity()){
                 int n=r.nextInt(2);
                 if (n==0) manager.hire(w.generateDeveloper());
                 else{
-                    TeamManager a=w.generateManager();
+                    IManager a=w.generateManager();
                     manager.hire(a);
-                    getWorkers(a, level-1);
+                    if (manager.getHirebehaviour().canHire(a,manager)) getWorkers(a, level-1);
                 }
             }
         }
     }
 
     public void generateCompany(){
-        getWorkers(this.boss, this.level-1);
+        getWorkers(this.boss,this.level-1);
     }
 
     public void generateTasks(int n){

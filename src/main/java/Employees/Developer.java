@@ -4,14 +4,13 @@ import java.util.*;
 
 public class Developer extends AbstractEmployee{
     private Task currenttask;
-    private ArrayList<Task> tasks;
 
     public Task getCurrenttask(){
         return this.currenttask;
     }
 
-    public Developer(String name, String surname, String role){
-        super(name, surname, Occupations.valueOf("Developer").getOccupationName(), role);
+    public Developer(String name, String surname, String role,String university,String gender,String country,String email){
+        super(name,surname,Occupations.valueOf("Developer").getOccupationName(),role,university,gender,country,email);
         this.tasks=new ArrayList<>();
     }
 
